@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+  <h1>CREATE PAGE</h1>
+  <hr>
+
+  <form action="" method="POST" class="d-inline">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% bootstrap_button "작성" button_type="submit" button_class="btn-primary" %}
+    
+  </form>
+  <a href="{% url 'community:index' %}">{% bootstrap_button "취소" button_type="submit" button_class="btn-warning" %}</a>
+
+ 
+  
+{% endblock content %}

@@ -10,8 +10,37 @@
   <title>Document</title>
 </head>
 <body>
-  {% block content %}
-  {% endblock content %}
+  <nav class="navbar navbar-light bg-light">
+
+  <div class="d-flex justify-content-between bd-highlight mb-3">
+
+    <div>
+      <a class="navbar-brand" href="{% url 'community:index' %}">INDEX</a>
+      <a class="navbar-brand" href="{% url 'community:create' %}">CREATE</a>
+    </div>
+
+    <div>
+      {% if request.user.is_authenticated %}
+        <form action="{% url 'accounts:logout' %}" method="POST">
+          {% csrf_token %}
+          <input type="submit" value="로그아웃">
+        </form>
+      {% else %}
+        <a class="navbar-brand" href="{% url 'accounts:signup' %}">회원가입</a>
+        <a class="navbar-brand" href="{% url 'accounts:login' %}">로그인</a>
+      {% endif %}
+    </div>
+
+  </div>
+
+
+  
+</nav>
+{{ request.user.username }}
+  <div class="container">
+    {% block content %}
+    {% endblock content %}
+  </div>
   {% bootstrap_javascript%}
 </body>
 </html>

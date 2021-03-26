@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>DETAIL PAGE</h1>
+  <hr>
+  <div class="container">
+    <p>글 번호 : {{ review.pk }}</p>
+    <p>작성자 : {{ review.user }}</p>
+    <p>제목 : {{ review.title }}</p>
+    <p>영화 제목 : {{ review.movie_title }}</p>
+    <p>내용 : {{ review.content }}</p>
+    <p>순위 : {{ review.rank }}</p>
+    <p>작성일 : {{ review.created_at }}</p>
+    <p>수정일 : {{ review.updated_at }}</p>
+  </div>
+  <hr>
+  
+  {% for comment in comments %}
+    <p>{{ comment.user }}: {{ comment.content }}</p>
+  {% empty %}
+    <p>댓글이 없습니다.</p>
+  {% endfor %}
+
+  {% comment %} 댓글 작성 폼 {% endcomment %}
+  <form action="{% url 'community:create_comment' review.pk %}" method="POST">
+    {% csrf_token %}
+    {{ comment_form }}
+    <input type="submit" value="작성">
+  </form>
+{% endblock content %}
